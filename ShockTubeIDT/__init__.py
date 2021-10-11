@@ -1,7 +1,7 @@
 """
 ShockTubeIDT
 
-Shock Tube Ignition Delay Time calculator utilizing Cantera.
+Shock tube ignition delay time calculator utilizing Cantera.
 """
 
 __version__ = "0.1.0"

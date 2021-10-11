@@ -3,8 +3,8 @@ from setuptools import setup
 setup(
     name='ShockTubeIDT',
     version='0.1.0',
-    description='Shock Tube Ignition Delay Time calculator utilizing Cantera',
-    url='https://github.com/mefuller/?',
+    description='Shock tube ignition delay time calculator utilizing Cantera',
+    url='https://gitlab.com/mefuller/shocktubeidt',
     author='Mark E. Fuller',
     author_email='fuller@stossrohr.net',
     license='Apache-2.0',
@@ -18,7 +18,7 @@ setup(
     classifiers=[
         'Development Status :: 1 - Planning',
         'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: Apache-2.0',
+        'License :: OSI Approved :: Apache Software License',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
