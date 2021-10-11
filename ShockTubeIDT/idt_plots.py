@@ -21,6 +21,10 @@ import numpy as np
 
 
 def comp_mix_mech(mixes, mechs, temps, pres, IDTs, labels, ofname):
+    """
+    Routine to plot comparison of igntion delay times for matrix of mechanisms and compositions.
+    Prints and saves plot showing absolute values and relative times.
+    """
     wdth = np.ones(1)
     hght = [
         3,

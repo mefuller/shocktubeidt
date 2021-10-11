@@ -21,6 +21,15 @@ ct.suppress_thermo_warnings()
 
 
 def ignition_delay(gas):
+    """
+    Returns an ignition delay time from a Cantera Solution object.
+    
+    Set desired temperature, pressure, and composition before calling.
+    
+    This function currently returns the maximum rate of pressure rise as the IDT.
+    If the returned value is 1 second, the mixture did not ignite (max. simulation time).
+    """
+    
     r = ct.IdealGasReactor(contents=gas, name="Batch Reactor")
     reactorNetwork = ct.ReactorNet([r])
 

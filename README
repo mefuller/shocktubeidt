@@ -1,0 +1,9 @@
+A really simple set of Python tools for shock tube ignition delay experiments:
+from ShockTubeIDT.ignition_delay  import ignition_delay
+from ShockTubeIDT.idt_plots import comp_mix_mech
+
+Check ok: `python setup.py check`
+Local install: `python setup.py install --user`
+Make source tarball: `python setup.py sdist`
+Sign tarball: `gpg --detach-sign -a dist/ShockTubeIDT-0.1.0.tar.gz`
+Test upload: `pip install twine && twine upload --repository-url https://test.pypi.org/legacy/ dist/ShockTubeIDT-0.1.0.tar.gz dist/ShockTubeIDT-0.1.0.tar.gz.asc`
