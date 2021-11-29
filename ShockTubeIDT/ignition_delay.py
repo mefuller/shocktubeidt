@@ -73,3 +73,118 @@ def ignition_delay(gas):
         tau = dpdtdf["dPdt"].idxmax()
 
     return tau
+
+def idt_sweep_T(gas, Trange, P, X):
+    """
+    Calculate a single pressure/mixture IDT curve with one mechanism
+    """
+
+    # storage array for results
+    IgnDelays = np.empty(len(Trange))
+
+    #calculate ignition delays
+    for q, T in enumerate(Trange):
+        gas.TPX = T, P, X
+        IgnDelays[q] = ignition_delay(gas)
+    
+    return IgnDelays
+
+def idt_sweep_TP(gas, Trange, Prange, X):
+    """
+    Calculate a set of IDT curves with one mechanism and mixture
+    """
+
+    # storage array for results
+    IgnDelays = np.empty((len(Prange), len(Trange)))
+
+    #calculate ignition delays
+    for q, P in enumerate(Prange):
+        IgnDelays[q,:] = idt_sweep_T(gas, Trange, P, X)
+    
+    return IgnDelays
+
+def idt_sweep_TX(gas, Trange, P, Xlist):
+    """
+    Calculate a set of IDT curves for multiple mixtures at one pressure
+    """
+
+    # storage array for results
+    IgnDelays = np.empty((len(Xlist), len(Trange)))
+
+    #calculate ignition delays
+    for q, X in enumerate(Xlist):
+        IgnDelays[q,:] = idt_sweep_T(gas, Trange, P, X)
+    
+    return IgnDelays
+
+def idt_sweep_TM(MechList, Trange, P, X):
+    """
+    Calculate a set of IDT curves for multiple mixtures at one pressure
+    """
+
+    # storage array for results
+    IgnDelays = np.empty((len(MechList), len(Trange)))
+
+    #calculate ignition delays
+    for q, M in enumerate(MechList):
+        gas = ct.Solution(M)
+        IgnDelays[q,:] = idt_sweep_T(gas, Trange, P, X)
+    
+    return IgnDelays
+
+def idt_sweep_TPX(gas, Trange, Prange, Xlist):
+    """
+    Calculate a set of IDT curves for multiple mixtures at one pressure
+    """
+
+    # storage array for results
+    IgnDelays = np.empty((len(Xlist), len(Prange), len(Trange)))
+
+    #calculate ignition delays
+    for q, X in enumerate(Xlist):
+        IgnDelays[q,:,:] = idt_sweep_TP(gas, Trange, Prange, X)
+    
+    return IgnDelays
+
+def idt_sweep_TMX(MechList, Trange, P, Xlist):
+    """
+    Calculate a set of IDT curves for multiple mixtures and mechanisms at one pressure
+    """
+
+    # storage array for results
+    IgnDelays = np.empty((len(Xlist), len(MechList), len(Trange)))
+
+    #calculate ignition delays
+    for q, X in enumerate(Xlist):
+        IgnDelays[q,:,:] = idt_sweep_TM(MechList, Trange, P, X)
+    
+    return IgnDelays
+
+def idt_sweep_TPM(MechList, Trange, Prange, X):
+    """
+    Calculate a set of IDT curves one mixture with multiple mechanisms and pressures
+    """
+
+    # storage array for results
+    IgnDelays = np.empty((len(Xlist), len(MechList), len(Trange)))
+
+    #calculate ignition delays
+    for q, M in enumerate(MechList):
+        gas = ct.Solution(M)
+        IgnDelays[q,:,:] = idt_sweep_TP(gas, Trange, Prange, X)
+    
+    return IgnDelays
+
+def idt_sweep_TMXP(MechList, Trange, Prange, X):
+    """
+    Calculate an arbitrary set of IDT curves
+    """
+
+    # storage array for results
+    IgnDelays = np.empty((len(Prange), len(Xlist), len(MechList), len(Trange)))
+
+    #calculate ignition delays
+    for q, P in enumerate(Prange):
+        IgnDelays[q,:,:,:] = idt_sweep_TMX(gas, Trange, Prange, X)
+    
+    return IgnDelays
