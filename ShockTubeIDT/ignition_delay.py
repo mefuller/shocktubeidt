@@ -15,6 +15,7 @@ limitations under the License.
 """
 
 import cantera as ct
+import numpy as np
 import pandas as pd
 
 ct.suppress_thermo_warnings()

@@ -20,6 +20,14 @@ from matplotlib.ticker import MaxNLocator
 import matplotlib.colors as mcolors
 import numpy as np
 
+# https://matplotlib.org/stable/api/markers_api.html
+markers = ["o", "s", "*", "^", "v", ">", "<", "h", "p", "D", "+", "|"]
+
+# https://matplotlib.org/stable/gallery/lines_bars_and_markers/linestyles.html
+styles = ["-", "--", ":", "-."]
+
+# https://matplotlib.org/stable/gallery/color/named_colors.html
+colors = list(mcolors.TABLEAU_COLORS)
 
 def comp_mix_mech(mixes, mechs, temps, IDTs, ofname):
     """
@@ -154,6 +162,7 @@ def comp_mech(mixes, mechs, temps, IDTs, ofname):
     Routine to plot comparison of igntion delay times for matrix of mechanisms and compositions.
     Compares IDT of different mechanisms for each mixtures.
     Prints and saves plot showing absolute values and relative times.
+    Use mechanism name of "data" to plot with symbols, not lines.
     """
     for q, X in enumerate(mixes):
         wdth = np.ones(1)
@@ -163,27 +172,27 @@ def comp_mech(mixes, mechs, temps, IDTs, ofname):
         ]  # make the Arrhenius plots 3 times larger than the comparison plot
         gs = gridspec.GridSpec(2, 1, width_ratios=wdth, height_ratios=hght)
 
-        # https://matplotlib.org/stable/api/markers_api.html
-        # MarkerList = ["o", "s", "*", "^", "v", ">", "<", "h", "p", "D", "+", "|"]
-
-        # https://matplotlib.org/stable/gallery/lines_bars_and_markers/linestyles.html
-        styles = ["-", "--", ":", "-."]
-
-        # https://matplotlib.org/stable/gallery/color/named_colors.html
-        colors = list(mcolors.TABLEAU_COLORS)
-
         # Plot figures at 2.64" width: standard ProCI column
         fig = plt.figure(dpi=600, figsize=(2.64, 3.5))
 
         ax = plt.subplot(gs[0])
         for w, M in enumerate(mechs):
-            plt.semilogy(
-                (1000.0 / temps),
-                IDTs[q, w, :],
-                ls=styles[w % len(styles)],
-                lw=2,
-                color=colors[q % len(colors)],
-            )
+            if M.strip().lower() == "data":
+                plt.semilogy(
+                    (1000.0 / temps),
+                    IDTs[q, w, :],
+                    marker=markers[w % len(markers)],
+                    ms=8,
+                    color=colors[q % len(colors)],
+                )
+            else:
+                plt.semilogy(
+                    (1000.0 / temps),
+                    IDTs[q, w, :],
+                    ls=styles[w % len(styles)],
+                    lw=2,
+                    color=colors[q % len(colors)],
+                )
 
         # ax.legend(loc="best", fontsize=2)
         ax.grid()
