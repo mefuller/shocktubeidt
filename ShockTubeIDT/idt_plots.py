@@ -19,6 +19,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import matplotlib.colors as mcolors
 import numpy as np
+from cividisHexValues import cividis_map
 
 # https://matplotlib.org/stable/api/markers_api.html
 markers = ["o", "s", "*", "^", "v", ">", "<", "h", "p", "D", "+", "|"]
@@ -40,264 +41,7 @@ def line_colors(n: int, cmap: list = None):
     # cividis color map values from
     # https://github.com/pnnl/cmaputil/blob/master/colormaps/cividisHexValues.txt
     if cmap is None:
-        cmap = [
-            "#00204c",
-            "#00204e",
-            "#002150",
-            "#002251",
-            "#002353",
-            "#002355",
-            "#002456",
-            "#002558",
-            "#00265a",
-            "#00265b",
-            "#00275d",
-            "#00285f",
-            "#002861",
-            "#002963",
-            "#002a64",
-            "#002a66",
-            "#002b68",
-            "#002c6a",
-            "#002d6c",
-            "#002d6d",
-            "#002e6e",
-            "#002e6f",
-            "#002f6f",
-            "#002f6f",
-            "#00306f",
-            "#00316f",
-            "#00316f",
-            "#00326e",
-            "#00336e",
-            "#00346e",
-            "#00346e",
-            "#01356e",
-            "#06366e",
-            "#0a376d",
-            "#0e376d",
-            "#12386d",
-            "#15396d",
-            "#17396d",
-            "#1a3a6c",
-            "#1c3b6c",
-            "#1e3c6c",
-            "#203c6c",
-            "#223d6c",
-            "#243e6c",
-            "#263e6c",
-            "#273f6c",
-            "#29406b",
-            "#2b416b",
-            "#2c416b",
-            "#2e426b",
-            "#2f436b",
-            "#31446b",
-            "#32446b",
-            "#33456b",
-            "#35466b",
-            "#36466b",
-            "#37476b",
-            "#38486b",
-            "#3a496b",
-            "#3b496b",
-            "#3c4a6b",
-            "#3d4b6b",
-            "#3e4b6b",
-            "#404c6b",
-            "#414d6b",
-            "#424e6b",
-            "#434e6b",
-            "#444f6b",
-            "#45506b",
-            "#46506b",
-            "#47516b",
-            "#48526b",
-            "#49536b",
-            "#4a536b",
-            "#4b546b",
-            "#4c556b",
-            "#4d556b",
-            "#4e566b",
-            "#4f576c",
-            "#50586c",
-            "#51586c",
-            "#52596c",
-            "#535a6c",
-            "#545a6c",
-            "#555b6c",
-            "#565c6c",
-            "#575d6d",
-            "#585d6d",
-            "#595e6d",
-            "#5a5f6d",
-            "#5b5f6d",
-            "#5c606d",
-            "#5d616e",
-            "#5e626e",
-            "#5f626e",
-            "#5f636e",
-            "#60646e",
-            "#61656f",
-            "#62656f",
-            "#63666f",
-            "#64676f",
-            "#65676f",
-            "#666870",
-            "#676970",
-            "#686a70",
-            "#686a70",
-            "#696b71",
-            "#6a6c71",
-            "#6b6d71",
-            "#6c6d72",
-            "#6d6e72",
-            "#6e6f72",
-            "#6f6f72",
-            "#6f7073",
-            "#707173",
-            "#717273",
-            "#727274",
-            "#737374",
-            "#747475",
-            "#757575",
-            "#757575",
-            "#767676",
-            "#777776",
-            "#787876",
-            "#797877",
-            "#7a7977",
-            "#7b7a77",
-            "#7b7b78",
-            "#7c7b78",
-            "#7d7c78",
-            "#7e7d78",
-            "#7f7e78",
-            "#807e78",
-            "#817f78",
-            "#828078",
-            "#838178",
-            "#848178",
-            "#858278",
-            "#868378",
-            "#878478",
-            "#888578",
-            "#898578",
-            "#8a8678",
-            "#8b8778",
-            "#8c8878",
-            "#8d8878",
-            "#8e8978",
-            "#8f8a78",
-            "#908b78",
-            "#918c78",
-            "#928c78",
-            "#938d78",
-            "#948e78",
-            "#958f78",
-            "#968f77",
-            "#979077",
-            "#989177",
-            "#999277",
-            "#9a9377",
-            "#9b9377",
-            "#9c9477",
-            "#9d9577",
-            "#9e9676",
-            "#9f9776",
-            "#a09876",
-            "#a19876",
-            "#a29976",
-            "#a39a75",
-            "#a49b75",
-            "#a59c75",
-            "#a69c75",
-            "#a79d75",
-            "#a89e74",
-            "#a99f74",
-            "#aaa074",
-            "#aba174",
-            "#aca173",
-            "#ada273",
-            "#aea373",
-            "#afa473",
-            "#b0a572",
-            "#b1a672",
-            "#b2a672",
-            "#b4a771",
-            "#b5a871",
-            "#b6a971",
-            "#b7aa70",
-            "#b8ab70",
-            "#b9ab70",
-            "#baac6f",
-            "#bbad6f",
-            "#bcae6e",
-            "#bdaf6e",
-            "#beb06e",
-            "#bfb16d",
-            "#c0b16d",
-            "#c1b26c",
-            "#c2b36c",
-            "#c3b46c",
-            "#c5b56b",
-            "#c6b66b",
-            "#c7b76a",
-            "#c8b86a",
-            "#c9b869",
-            "#cab969",
-            "#cbba68",
-            "#ccbb68",
-            "#cdbc67",
-            "#cebd67",
-            "#d0be66",
-            "#d1bf66",
-            "#d2c065",
-            "#d3c065",
-            "#d4c164",
-            "#d5c263",
-            "#d6c363",
-            "#d7c462",
-            "#d8c561",
-            "#d9c661",
-            "#dbc760",
-            "#dcc860",
-            "#ddc95f",
-            "#deca5e",
-            "#dfcb5d",
-            "#e0cb5d",
-            "#e1cc5c",
-            "#e3cd5b",
-            "#e4ce5b",
-            "#e5cf5a",
-            "#e6d059",
-            "#e7d158",
-            "#e8d257",
-            "#e9d356",
-            "#ebd456",
-            "#ecd555",
-            "#edd654",
-            "#eed753",
-            "#efd852",
-            "#f0d951",
-            "#f1da50",
-            "#f3db4f",
-            "#f4dc4e",
-            "#f5dd4d",
-            "#f6de4c",
-            "#f7df4b",
-            "#f9e049",
-            "#fae048",
-            "#fbe147",
-            "#fce246",
-            "#fde345",
-            "#ffe443",
-            "#ffe542",
-            "#ffe642",
-            "#ffe743",
-            "#ffe844",
-            "#ffe945",
-        ]
+        cmap = cividis_map
 
     # check n
     if n < 1 or not isinstance(n, int):
@@ -511,24 +255,31 @@ def comp_mech(mixes, mechs, temps, IDTs, ofname):
         fig.tight_layout()
         fig.savefig(f"{fname}-mix{q}.{fext}")
 
-def comp_mech_data(mixes, mechs, temps, IDTs, ofname, Tdata, Taudata):
+def comp_mech_data(mixes, mechs, temps, IDTs, ofname, Tdata = None, Taudata = None, RelPlot = True):
     """
     Routine to plot comparison of igntion delay times for matrix of mechanisms and compositions.
     Compares IDT of different mechanisms for each mixtures.
     Prints and saves plot showing absolute values and relative times.
-    **hacked up right now to plot one data set on first figure**
-    **also hacked to change up colors/styles**
+    **test function for data, dropping relative plot**
     """
     for q, X in enumerate(mixes):
-        wdth = np.ones(1)
-        hght = [
-            3,
-            1,
-        ]  # make the Arrhenius plots 3 times larger than the comparison plot
-        gs = gridspec.GridSpec(2, 1, width_ratios=wdth, height_ratios=hght)
+        if RelPlot:
+            wdth = np.ones(1)
+            hght = [
+                3,
+                1,
+            ]  # make the Arrhenius plots 3 times larger than the comparison plot
+            gs = gridspec.GridSpec(2, 1, width_ratios=wdth, height_ratios=hght)
 
-        # Plot figures at 2.64" width: standard ProCI column
-        fig = plt.figure(dpi=600, figsize=(2.64, 3.5))
+            # Plot figures at 2.64" width: standard ProCI column
+            fig = plt.figure(dpi=600, figsize=(2.64, 3.5))
+        else:
+            wdth = [1]
+            hght = [1]
+            gs = gridspec.GridSpec(len(hght), len(wdth), width_ratios=wdth, height_ratios=hght)
+
+            # Plot figures at 2.64" width: standard ProCI column
+            fig = plt.figure(dpi=600, figsize=(2.64, 2.64))
 
         #import colors
         #colors = tabcolors
@@ -544,38 +295,49 @@ def comp_mech_data(mixes, mechs, temps, IDTs, ofname, Tdata, Taudata):
                     color=colors[w % len(colors)],
                 )
         # add data
-        if q == 0:
-            plt.semilogy(
-                    (1000.0 / Tdata),
-                    Taudata,
-                    ls='none',
-                    marker=markers[0],
-                    ms=8,
-                    markerfacecolor='none',
-                    markeredgewidth=1,
-                    color=colors[1],
-                )
+        if Tdata is not None:
+            if Taudata is not None:
+                try:
+                    plt.semilogy(
+                            (1000.0 / Tdata[q, w, :]),
+                            Taudata[q, w, :],
+                            ls='none',
+                            marker=markers[q],
+                            ms=8,
+                            markerfacecolor='none',
+                            markeredgewidth=1,
+                            color=colors[q],
+                        )
+                except:
+                    print(f"Unable to plot data at mix {q} and mechanism {w}:")
+                    print(X)
+                    print(M)
+            else:
+                print("WARNING: experimental values for temperature have been passed, but not IDT values")
+        elif Taudata is not None:
+            print("WARNING: experimental IDT values have been passed, but not for temperature")
 
         # ax.legend(loc="best", fontsize=2)
         ax.grid()
         ax.set_ylabel("Ignition Delay (s)", fontsize=12)
         # ax.tick_params(labelsize=8)
 
-        ax = plt.subplot(gs[1])
-        for w, M in enumerate(mechs):
-            plt.plot(
-                (1000.0 / temps),
-                IDTs[q, w, :] / IDTs[q, 0, :],
-                ls=styles[w % len(styles)],
-                lw=2,
-                color=colors[w % len(colors)],
-            )
+        if RelPlot:
+            ax = plt.subplot(gs[1])
+            for w, M in enumerate(mechs):
+                plt.plot(
+                    (1000.0 / temps),
+                    IDTs[q, w, :] / IDTs[q, 0, :],
+                    ls=styles[w % len(styles)],
+                    lw=2,
+                    color=colors[w % len(colors)],
+                )
+            ax.set_ylabel("Ratio", fontsize=12)
+            ax.yaxis.set_major_locator(MaxNLocator(4))
 
         # ax.legend(loc='best',fontsize=14)
         # ax.grid()
         ax.set_xlabel("1000/T (1/K)", fontsize=12)
-        ax.set_ylabel("Ratio", fontsize=12)
-        ax.yaxis.set_major_locator(MaxNLocator(4))
         # ax.tick_params(labelsize=6)
 
         # split ofname at extension
