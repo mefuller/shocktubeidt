@@ -37,7 +37,7 @@ def line_colors(n: int, cmap: list = None):
     n%s as first argument to utilize more widely-spaced colors.
     Default to using cividis color map with option to override.
     """
-    print(n)
+
     # cividis color map values from
     # https://github.com/pnnl/cmaputil/blob/master/colormaps/cividisHexValues.txt
     if cmap is None:
