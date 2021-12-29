@@ -1,0 +1,1 @@
+ShockTubeIDT.egg-info/requires.txt
